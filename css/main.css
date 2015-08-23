@@ -1,0 +1,177 @@
+@CHARSET "UTF-8";
+/*
+Author: Adrian Mato
+Author URI: http://www.yensdesign.com & http://web.ontuts.com
+*/
+
+/******* GENERAL RESET *******/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em,
+font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody,
+ tfoot, thead, tr, th, td {
+border:0pt none;
+font-family:inherit;
+font-size:100%;
+font-style:inherit;
+font-weight:inherit;
+margin:0pt;
+padding:0pt;
+vertical-align:baseline;
+}
+table{
+	border-collapse: separate;
+	border-spacing: 0pt;
+}
+strong{
+	font-weight: 700;
+}
+caption, th, td{
+	font-weight:normal;
+	text-align:left;
+}
+blockquote:before, blockquote:after, q:before, q:after{
+	content:"";
+}
+blockquote, q{
+	quotes:"" "";
+}
+pre{
+	font-family: Arial, Helvetica, sans-serif;
+}
+input{
+	border: 0;
+	margin: 0;
+	font-family: Arial, Helvetica, sans-serif;
+}
+textarea{
+	font-family: Arial, Helvetica, sans-serif;
+	color: #888888;
+	padding: 7px 3px 0 4px;
+	font-size: 11px;
+}
+select{
+	font-size: 11px;
+	color: #888888;
+	background: #fff;
+	font-family: Arial, Helvetica, sans-serif;
+	border: 1px solid #CAD2CE;
+}
+#menuBotones ul{
+	list-style: none;
+	list-style-type: none;
+	list-style-position: outside;
+}
+#menuBotones a{
+	cursor: pointer;
+	color: #296ba5;
+	text-decoration: none;
+	outline: none !Important;
+}
+html,body{
+	height:100%;
+}
+.clear{
+	clear: both;
+	height: 0;
+	visibility: hidden;
+	display: block;
+	line-height: 0;
+}
+.clearfix{
+	overflow: hidden;
+}
+.fleft{
+	float: left;
+}
+.fright{
+	float: right;
+}
+.italic{
+	font-style: italic;
+}
+/******* /GENERAL RESET *******/
+
+/******* CONTENT *******/
+.wrapper{
+	width: 800px;
+	margin: 0pt auto;
+	padding-top: 50px;
+}
+h1{
+	color: #fff;
+	font-size: 18px;
+	line-height: 3em;
+}
+.section{
+	margin-bottom: 25px;
+}
+/******* /CONTENT *******/
+
+/******* MENU *******/
+#menuBotones{
+	display: none;
+	width: 165px;
+	padding: 6px;
+	background: #171717;
+	border: 1px solid #3e3e3e;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	position: absolute;
+}
+#menuBotones ul{
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
+	color: #6d6d6d;
+	background: #fff;
+	border: 1px solid #171717;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-khtml-border-radius: 5px;
+}
+#menuBotones ul li{
+	line-height: 1.5em;
+	padding: 5px 5px 5px 25px;
+	font-size: 11px;
+	border-bottom: 1px solid #fff;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-khtml-border-radius: 5px;
+}
+#menuBotones ul li:hover{
+	background-color: #fff8cc;
+	border-bottom: 1px solid #ffe222;
+	color: #000;
+	cursor: pointer;
+}
+#menuBotones ul li a{
+	color: #6d6d6d;
+	display: block;
+}
+#menuBotones ul li.disabled, #menuBotones ul li.disabled a{
+	color: #bbbbbb;
+	cursor: default;
+}
+#menuBotones ul li.disabled:hover{
+	background: #fff;
+	border-bottom: 1px solid #fff;
+}
+#menuBotones ul li{
+	background-position: 3px 6px;
+	background-repeat: no-repeat;
+}
+#menuBotones ul li#menu_consultar{
+	background-image: url(../imagenes/menuBotones/consultar.jpg);
+}
+#menuBotones ul li#menu_editar{
+	background-image: url(../imagenes/menuBotones/editar.jpg);
+}
+#menuBotones ul li#menu_eliminar{
+	background-position: 3px 5px;
+	background-image: url(../imagenes/menuBotones/eliminar.jpg);
+}
+#menuBotones ul li#menu_agregar{
+	background-image: url(../imagenes/menuBotones/agregar.jpg);
+}
+/******* /MENU *******/
