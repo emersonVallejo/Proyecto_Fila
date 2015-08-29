@@ -34,6 +34,7 @@ class HTML
                         <script type='text/javascript' src='js/flexigrid.js'></script>
                         <script type='text/javascript' src='js/menuBotones.js'></script>
                         <script type='text/javascript'>$.mobile.loader.prototype.options.html = ' ';</script>
+						
                     </head>
                   ";
         return $codigo;
