@@ -1,7 +1,7 @@
 <?php
 class SQL extends mysqli
 {
-   static $server= "emerson-pc";
+   static $server= "localhost";
    static $user = "fila";
    static $password = "fila";
    static $bd = "fila_proyecto";

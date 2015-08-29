@@ -10,7 +10,7 @@
         {
             if (!empty($_GET['tabla']))
             {
-                include("http://emerson-pc/proyecto/".$_GET['ruta']."?campos=".$_GET['campos']."&tabla=".$_GET['tabla']);        
+                include($ruta.$_GET['ruta']."?campos=".$_GET['campos']."&tabla=".$_GET['tabla']);        
             }
             else
             {
