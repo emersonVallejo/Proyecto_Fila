@@ -16,5 +16,9 @@ echo HTML::esquemaHTML(
         HTML::alert("").
         HTML::menuBotones()
     )
+
+
+
+    
 );
 ?>
