@@ -571,7 +571,7 @@ class HTML
         return $codigo;
     }
 
-    public function idiomaTexto($clave, $tipo=0)
+	public function idiomaTexto($clave, $tipo=0)
     {
         $idioma = "ESP";        
         switch ($tipo) {
@@ -584,12 +584,12 @@ class HTML
                 break;
         }
 
-        $ruta = $_SERVER['DOCUMENT_ROOT']."/proyecto/";
-        include($ruta."idiomas/".$carpeta."/".$idioma.".php");
+        $ruta = "../idiomas/".$carpeta."/".$idioma.".php";
+        include($ruta);
 
-        if(!empty($idiomaTexto[$clave]))
+        if(!empty($idioma[$clave]))
         {
-            return $idiomaTexto[$clave];
+            return $idioma[$clave];
         }
         else
         {
