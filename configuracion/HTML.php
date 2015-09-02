@@ -243,7 +243,7 @@ class HTML
         return $codigo;
     }
     
-    public function cajaTexto($id, $texto = "", $ayuda = "", $clase = "")
+    public function cajaTexto($id, $texto = "",$maxlength="", $ayuda = "", $clase = "")
     {
         $codigo = "<input type='text' ";
         if(!empty($id))
@@ -273,7 +273,13 @@ class HTML
         {
             $codigo .= "placeholder='".$ayuda."'";
         }
-        
+
+        if(!empty($maxlength))
+        {
+            $codigo .= "maxlength='".$maxlength."'";
+        }
+
+        $codigo .= "/>"; 
         return $codigo;
     }
     
@@ -595,6 +601,34 @@ class HTML
         {
             return $clave;
         }
+    }
+
+    public function FormularioDinamico($Camposfo ="",$Tabla ="",$condicion ="")
+    {
+      
+      $registros = SQL:: filasEnArreglo(SQL::seleccionar("COLUMN_NAME, NUMERIC_PRECISION, CHARACTER_MAXIMUM_LENGTH,COLUMN_COMMENT", "INFORMATION_SCHEMA.COLUMNS", "COLUMN_NAME IN (".$Camposfo.")"));
+         foreach($registros as $clave => $valor)
+        { 
+            $LabelNombre = self::idiomaTexto($valor[0]);
+            if ($valor[3] == "texto")
+            {
+                $codigo.= self::texto($LabelNombre,$LabelNombre).":";
+                $resultado = SQL::filasEnArreglo(SQL::seleccionar($valor[0],$Tabla,$condicion));
+                
+                   $codigo.= self::cajaTexto($valor[0],$resultado[0][0],$valor[2]); 
+                 
+            }
+            
+            if ($valor[3] == "Combo") 
+            {
+                $codigo.= self::texto($LabelNombre,$LabelNombre).":";
+                $codigo.= self::lista($valor[0]);
+            }
+                           
+        }
+         
+         return $codigo ;
+     
     }
 }
 ?>

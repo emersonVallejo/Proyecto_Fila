@@ -2,6 +2,8 @@
     $idiomaTexto = array(
         "mnsId"     => "Id de la tabla Menus",
         "mnsPadre"  => "Id del campo Menus padre",
-        "mnsDescripcion" => "Descripcion del menu"
+        "mnsDescripcion" => "Descripcion del menu",
+        "mnsRuta"   => "Ruta",
+        "mnsEstado" => "Estado"
     )
 ?>
