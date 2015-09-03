@@ -593,9 +593,9 @@ class HTML
         $ruta = "../idiomas/".$carpeta."/".$idioma.".php";
         include($ruta);
 
-        if(!empty($idioma[$clave]))
+        if(!empty($textoIdioma[$clave]))
         {
-            return $idioma[$clave];
+            return $textoIdioma[$clave];
         }
         else
         {
