@@ -2,9 +2,9 @@
 class SQL extends mysqli
 {
    static $server= "localhost";
-   static $user = "fila";
-   static $password = "fila";
-   static $bd = "fila_proyecto";
+   static $user = "root";
+   static $password = "root";
+   static $bd = "fila_proyecto2";
 
    public function conectar()
    {            

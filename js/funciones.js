@@ -9,10 +9,7 @@ $(document).ready(function (){
             $("article").load("include/incluir.php?"+$.param(
                 {ruta: link}
             ));
-            $("div.QOverlay").remove();
-            QueryLoader.init();
         }
     });
-
 });
 

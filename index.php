@@ -1,7 +1,6 @@
 <?php
 include("include/incluir.php");
 
-//$titulo = SQL::filasEnArreglo(SQL::seleccionar("trcPriNombre","bif_terceros"));
 $menu = SQL::filasEnArreglo(SQL::seleccionar("mnsId, mnsDescripcion, mnsRuta","bif_menus", "mnsPadre = 0"));
 $css = CSS::estiloHTML();
 $js = "";
@@ -16,9 +15,5 @@ echo HTML::esquemaHTML(
         HTML::alert("").
         HTML::menuBotones()
     )
-
-
-
-    
 );
 ?>

@@ -9,7 +9,7 @@ $arreglo = array(
 
 echo HTML::ventanaDialogo($arreglo);
 echo HTML::tablaDinamica("'mnsId', 'mnsPadre', 'mnsRuta', 'mnsDescripcion', 'mnsEstado', 'mnsDescripcion'", "bif_menus", "1=1");
-
+echo HTML::cajaChequeda("chkEjemplo", "Masculino", "", "", false);
 
 
 

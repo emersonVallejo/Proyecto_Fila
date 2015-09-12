@@ -18,22 +18,24 @@ class HTML
                         <meta name='viewport' content='width=device-width, initial-scale=1.0, minimum-scale=1.0'>
                         <title>".$titulo."</title>
                         ".$css."
+                        <link rel='shortcut icon' type='image/png' href='imagenes/icon.png' />
                         <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Lato:300,400'>
+
                         <link rel='stylesheet' type='text/css' href='css/menuresponsive.css'>  
                         <link rel='stylesheet' type='text/css' href='css/flexigrid.css' />
-                        <link rel='stylesheet' type='text/css' href='css/queryLoader.css' type='text/css' />
                         <link rel='stylesheet' type='text/css' href='css/estilos.css' />
                         <link rel='stylesheet' type='text/css' href='css/main.css' />
+                        <link rel='stylesheet' type='text/css' href='css/jquery-ui.css' />
+                        <link rel='stylesheet' type='text/css' href='css/jquery-ui.structure.css' />
+                        <link rel='stylesheet' type='text/css' href='css/jquery-ui.theme.css' />                    
+                        
+                        <script type='text/javascript' src='js/jquery.js'></script>
+                        <script type='text/javascript' src='js/jquery-ui.js'></script>
 
-                        <script src='http://code.jquery.com/jquery-1.11.1.min.js'></script>
-                        <link rel='stylesheet' href='//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css'>
-                        <script src='//code.jquery.com/ui/1.11.3/jquery-ui.js'></script>
                         <script type='text/javascript' src='js/funciones.js'></script>
                         <script type='text/javascript' src='js/menuresponsive.js'></script>                        
-                        <script type='text/javascript' src='js/queryLoader.js'></script>                       
                         <script type='text/javascript' src='js/flexigrid.js'></script>
                         <script type='text/javascript' src='js/menuBotones.js'></script>
-                        <script type='text/javascript'>$.mobile.loader.prototype.options.html = ' ';</script>
 						
                     </head>
                   ";
@@ -45,9 +47,6 @@ class HTML
         $codigo = "
                     <body>
                         ".$html."
-                        <script type='text/javascript'>
-                            QueryLoader.init();
-                        </script>
                     </body>
                   ";
         return $codigo;
@@ -259,10 +258,6 @@ class HTML
         {
             $codigo .= "class='".$clase."'";
         }
-        else
-        {
-            return self::mensaje("Error al utilizar la funcion cajaTexto: no envio clase");
-        }
         
         if(!empty($texto))
         {
@@ -280,10 +275,48 @@ class HTML
         }
 
         $codigo .= "/>"; 
+
+        return $codigo;
+    }
+
+    public function cajaChequeda($id, $texto = "", $clase = "", $seleccionado = false, $deshabilitado = false)
+    {
+        $codigo = "<input type='checkbox' ";
+        if(!empty($id))
+        {
+            $codigo .= "id='".$id."'";
+        }
+        else
+        {
+            return self::mensaje("Error al utilizar la funcion cajaChequeda: no envio id");
+        }
+        
+        if(!empty($clase))
+        {
+            $codigo .= "class='".$clase."'";
+        }
+
+        if(!empty($texto))
+        {
+            $codigo .= "value='".$texto."'";
+        }
+
+        if(!empty($seleccionado))
+        {
+            $codigo .= "checked='".$seleccionado."'";
+        }
+
+        if(!empty($deshabilitado))
+        {
+            $codigo .= "disabled='".$deshabilitado."'";
+        }
+        
+        $codigo .= "/> " .$texto;
+
         return $codigo;
     }
     
-    public function lista($id, $valores = array(), $clase = "")
+    public function lista($id, $valores = array(), $clase = "",$ValorSeleccionar="")
     {
         $codigo = "<select ";
         
@@ -307,13 +340,15 @@ class HTML
         {
             foreach ($valores as $clave => $valor) 
             {
-                $codigo .= "<option value=".$valor[0].">".$valor[1]."</option>";  
+                
+                $seleccionado = $valor[1]===$ValorSeleccionar?"selected":"";
+                $codigo .= "<option value='".$valor[0]."' ".$seleccionado.">".$valor[1]."</option>";  
             } 
         }
-        else
+        /*else
         {
             return self::mensaje("Error al utilizar la funcion lista: no envio valores");
-        }
+        }*/
         
         $codigo .= "</select>";        
         return $codigo;
@@ -342,7 +377,7 @@ class HTML
         if (!empty($ayuda))
         {
             $codigo .= "tooltip='".$ayuda."' ";
-        }
+        } 
         
         if (!empty($clase))
         {
@@ -475,12 +510,12 @@ class HTML
     public function menuBotones()
     {
         $codigo = "<ul>
-            <li id='menu_consultar'>Consultar</li>
-            <li id='menu_editar'>Editar</li>
-            <li id='menu_eliminar'>Eliminar</li>
-            <li id='menu_agregar'>Nuevo</li>
-            <li id='menu_favoritos'>otros</li>
-        </ul>";
+                        <li id='menu_consultar'>Consultar</li>
+                        <li id='menu_editar'>Editar</li>
+                        <li id='menu_eliminar'>Eliminar</li>
+                        <li id='menu_agregar'>Nuevo</li>
+                        <li id='menu_favoritos'>otros</li>
+                    </ul>";
 
         $codigo = self::contenedor("menuBotones", $codigo);
 
@@ -543,7 +578,7 @@ class HTML
                                     , width : 200
                                     , sortable : true,
                                     align : 'center'
-                                },";            
+                                },";
                 }
 
                 $codigo = substr($codigo, 0, strlen($codigo)-1);
@@ -577,7 +612,7 @@ class HTML
         return $codigo;
     }
 
-	public function idiomaTexto($clave, $tipo=0)
+    public function idiomaTexto($clave, $tipo=0)
     {
         $idioma = "ESP";        
         switch ($tipo) {
@@ -590,45 +625,85 @@ class HTML
                 break;
         }
 
-        $ruta = "../idiomas/".$carpeta."/".$idioma.".php";
-        include($ruta);
+        $ruta = $_SERVER['DOCUMENT_ROOT']."/proyecto/";
+        include($ruta."idiomas/".$carpeta."/".$idioma.".php");
 
-        if(!empty($textoIdioma[$clave]))
+        if(!empty($idiomaTexto[$clave]))
         {
-            return $textoIdioma[$clave];
+            return $idiomaTexto[$clave];
         }
         else
         {
             return $clave;
         }
     }
-
-    public function FormularioDinamico($Camposfo ="",$Tabla ="",$condicion ="")
+        
+    
+    public function FormularioDinamico($camposFormulario ="", $tablasFormulario= "", $condicionFormulario="", $condicionCampos =array())
     {
-      
-      $registros = SQL:: filasEnArreglo(SQL::seleccionar("COLUMN_NAME, NUMERIC_PRECISION, CHARACTER_MAXIMUM_LENGTH,COLUMN_COMMENT", "INFORMATION_SCHEMA.COLUMNS", "COLUMN_NAME IN (".$Camposfo.")"));
-         foreach($registros as $clave => $valor)
-        { 
-            $LabelNombre = self::idiomaTexto($valor[0]);
-            if ($valor[3] == "texto")
-            {
-                $codigo.= self::texto($LabelNombre,$LabelNombre).":";
-                $resultado = SQL::filasEnArreglo(SQL::seleccionar($valor[0],$Tabla,$condicion));
-                
-                   $codigo.= self::cajaTexto($valor[0],$resultado[0][0],$valor[2]); 
-                 
-            }
-            
-            if ($valor[3] == "Combo") 
-            {
-                $codigo.= self::texto($LabelNombre,$LabelNombre).":";
-                $codigo.= self::lista($valor[0]);
-            }
-                           
-        }
+        $codigo = "<div id='DivConteAll'>";
+        
+        $query = SQL:: filasEnArreglo1(SQL::seleccionar(str_replace("'", "", $camposFormulario), $tablasFormulario, $condicionFormulario));
+        
+        $arregloCampos = split(",", $camposFormulario);
+        foreach($arregloCampos as $valor)
+        {
+            $valor = str_replace("'", "", $valor);
+
+            $informacionCampo = SQL:: filasEnArreglo(SQL::seleccionar("cmtNombreColumna, cmtPrecisionNumero, cmtCaracterMaximo, cmtTipoObjeto", "bif_CamposTablas", "cmtNombreColumna = '".$valor."'"));
+                $tipoObjeto = $informacionCampo[0][3];
+
+                if(!empty($condicionCampos[$valor]))
+                {
+
+                    $validacionCampo = SQL:: filasEnArreglo(SQL::seleccionar("cmtConsulta, cmtTipoObjeto", "bif_CamposTablas", "cmtNombreColumna = '".$condicionCampos[$valor][0]."'"));
+                    $consulta ="";
+                    if(!empty($validacionCampo)){
+                        $tipoObjeto = $validacionCampo[0][1];
+
+                        $consulta = str_replace("%&%", $valor, $validacionCampo[0][0]);
+                        
+                        if(strpos($consulta, "FROM") > 0)
+                        {
+                            if(strpos($consulta, "WHERE") > 0)
+                            {
+                                $consulta .= " AND ";
+                            }
+                            else
+                            {
+                                $consulta .= " WHERE ";
+                            }
+                        }
          
+                    }
+                    $consulta .= $condicionCampos[$valor][1];
+                        
+                    $lista = SQL::filasEnArreglo($consulta);
+                }
+    
+                $codigo.= self::texto("lblInformativo".$valor, self::idiomaTexto($valor, 0)).":";
+                
+                if ($tipoObjeto == "CajaTexto")
+                {
+                    $codigo.= self::cajaTexto("txt".$valor, $query[0][$valor], $informacionCampo[0][2]);    
+                }
+                
+                if ($tipoObjeto == "Lista") 
+                {
+                    $codigo.= self::lista("lst".$valor, $lista, "", $query[0][$valor]);
+                } 
+                
+                if ($tipoObjeto == "Texto" || empty($informacionCampo[0][3]) )
+                {
+                    $codigo.= self::texto("lbl".$valor,$query[0][$valor]);
+                }
+
+        }
+         $codigo.= "</div>";
          return $codigo ;
-     
+
     }
+    
+    
 }
 ?>
